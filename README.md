@@ -23,12 +23,12 @@ int expense = calculator.calculateExpense(startTime, endTime, bedTime);
 Want to contribute? Great!
 
 To build the project and run all of the tests, follow these steps:
--Fork this repository
--Clone your fork locally
+1. Fork this repository
+2. Clone your fork locally
 ```
 git clone https://github.com/{your-github-username}/babysitter-kata.git
 ```
--Execute Gradle Test Task
+3. Execute Gradle Test Task
 ```
 ./gradlew clean test
 ```
