@@ -104,4 +104,18 @@ public class BabysitterExpenseCalculatorTest {
         int expectedExpense =  (24 - startingHour) * BEDTIME_UNTIL_MIDNIGHT_RATE;
         assertEquals(expectedExpense, expense);
     }
+
+    @Test
+    public void shouldMake16DollarsAnHourFromMidnightUntilEndTimeWhenEndTimeisAfterMidnight() {
+        int midnightHour = 0;
+        int endingHour = 3;
+        LocalDateTime startTime = LocalDateTime.of(YEAR, MONTH, 20, midnightHour, 0);
+        LocalDateTime bedTime = startTime;
+        LocalDateTime endTime = LocalDateTime.of(YEAR, MONTH, 20, endingHour, 0);
+
+        int expense = calculator.calculateExpense(startTime, endTime, bedTime);
+
+        int expectedExpense =  (endingHour - midnightHour) * 16;
+        assertEquals(expectedExpense, expense);
+    }
 }
