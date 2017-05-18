@@ -15,6 +15,7 @@ public class BabysitterExpenseCalculatorTest {
     private static final int MONTH = 5;
     private static final int UNTIL_BEDTIME_RATE = 12;
     private static final int BEDTIME_UNTIL_MIDNIGHT_RATE = 8;
+    public static final int MIDNIGHT_TO_END_TIME_RATE = 16;
 
     private BabysitterExpenseCalculator calculator;
 
@@ -39,7 +40,7 @@ public class BabysitterExpenseCalculatorTest {
 
     @Test
     public void shouldThrowExceptionWhenStartTimeOutsideOf5pmTo4Am() throws Exception {
-        LocalDateTime startTime = LocalDateTime.of(YEAR, MONTH,20,16,0);
+        LocalDateTime startTime = LocalDateTime.of(YEAR, MONTH,20, MIDNIGHT_TO_END_TIME_RATE,0);
         LocalDateTime endTime = LocalDateTime.of(YEAR, MONTH,20,18,0);
         LocalDateTime bedTime = endTime;
 
@@ -115,7 +116,22 @@ public class BabysitterExpenseCalculatorTest {
 
         int expense = calculator.calculateExpense(startTime, endTime, bedTime);
 
-        int expectedExpense =  (endingHour - midnightHour) * 16;
+        int expectedExpense =  (endingHour - midnightHour) * MIDNIGHT_TO_END_TIME_RATE;
+        assertEquals(expectedExpense, expense);
+    }
+
+    @Test
+    public void shouldCalculateExpenseWhenBedtimeIsAfterMidnight() {
+        int startingHour = 18;
+        LocalDateTime startTime = LocalDateTime.of(YEAR, MONTH, 20, startingHour, 0);
+        int startToBedtimeHours = 7;
+        LocalDateTime bedTime = startTime.plusHours(startToBedtimeHours);
+        int bedtimeToEndHours = 2;
+        LocalDateTime endTime = bedTime.plusHours(bedtimeToEndHours);
+
+        int expense = calculator.calculateExpense(startTime, endTime, bedTime);
+
+        int expectedExpense =  startToBedtimeHours * UNTIL_BEDTIME_RATE + bedtimeToEndHours * MIDNIGHT_TO_END_TIME_RATE;
         assertEquals(expectedExpense, expense);
     }
 }

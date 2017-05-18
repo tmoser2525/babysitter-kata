@@ -22,12 +22,15 @@ public class BabysitterExpenseCalculator {
 
         int beforeBedtimeExpense = calculateExpenseBeforeBedtime(startTime, bedTime);
         int bedtimeUntilMidnightExpense = calculateExpenseFromBedtimeUntilMidnight(bedTime, endTime);
-        int midnightUntilEndTimeExpense = calculateExpenseFromMidnightUntilEndTime(endTime);
+        int midnightUntilEndTimeExpense = calculateExpenseFromMidnightUntilEndTime(bedTime, endTime);
         return beforeBedtimeExpense + bedtimeUntilMidnightExpense + midnightUntilEndTimeExpense;
     }
 
-    private int calculateExpenseFromMidnightUntilEndTime(LocalDateTime endTime) {
+    private int calculateExpenseFromMidnightUntilEndTime(LocalDateTime bedTime, LocalDateTime endTime) {
         if (!isTimeBeforeMidnight(endTime)) {
+            if(!isTimeBeforeMidnight(bedTime)) {
+                return (int)bedTime.until(endTime, ChronoUnit.HOURS) * MIDNIGHT_TO_END_TIME_RATE;
+            }
             return (int)previousMidnightFromDate(endTime).until(endTime, ChronoUnit.HOURS) * MIDNIGHT_TO_END_TIME_RATE;
         }
         return 0;
