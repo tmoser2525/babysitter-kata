@@ -81,42 +81,42 @@ public class BabysitterExpenseCalculatorTest {
     @Test
     public void shouldMakeTwelveDollarsAnHourFromStartUntilBedtime() {
         int startingHour = 17;
-        int endingHour = 0;
+        int hoursUntilBedtime = 7;
         LocalDateTime startTime = LocalDateTime.of(YEAR, MONTH, 20, startingHour, 0);
-        LocalDateTime bedTime = LocalDateTime.of(YEAR, MONTH, 21, endingHour, 0);
+        LocalDateTime bedTime = startTime.plusHours(hoursUntilBedtime);
         LocalDateTime endTime = bedTime;
 
         int expense = calculator.calculateExpense(startTime, endTime, bedTime);
 
-        int expectedExpense = (24 - startingHour) * UNTIL_BEDTIME_RATE;
+        int expectedExpense = hoursUntilBedtime * UNTIL_BEDTIME_RATE;
         assertEquals(expectedExpense, expense);
     }
 
     @Test
     public void shouldMake8DollarsAnHourFromBedtimeUntilMidnightWhenBedtimeIsBeforeMidnight() {
         int startingHour = 17;
-        int midnightHour = 0;
+        int hoursUntilMidnight = 7;
         LocalDateTime startTime = LocalDateTime.of(YEAR, MONTH, 20, startingHour, 0);
         LocalDateTime bedTime = startTime;
-        LocalDateTime endTime = LocalDateTime.of(YEAR, MONTH, 21, midnightHour, 0);
+        LocalDateTime endTime = bedTime.plusHours(hoursUntilMidnight);
 
         int expense = calculator.calculateExpense(startTime, endTime, bedTime);
 
-        int expectedExpense =  (24 - startingHour) * BEDTIME_UNTIL_MIDNIGHT_RATE;
+        int expectedExpense =  hoursUntilMidnight * BEDTIME_UNTIL_MIDNIGHT_RATE;
         assertEquals(expectedExpense, expense);
     }
 
     @Test
     public void shouldMake16DollarsAnHourFromMidnightUntilEndTimeWhenEndTimeisAfterMidnight() {
         int midnightHour = 0;
-        int endingHour = 3;
         LocalDateTime startTime = LocalDateTime.of(YEAR, MONTH, 20, midnightHour, 0);
         LocalDateTime bedTime = startTime;
-        LocalDateTime endTime = LocalDateTime.of(YEAR, MONTH, 20, endingHour, 0);
+        int hoursPastMidnight = 3;
+        LocalDateTime endTime = startTime.plusHours(hoursPastMidnight);
 
         int expense = calculator.calculateExpense(startTime, endTime, bedTime);
 
-        int expectedExpense =  (endingHour - midnightHour) * MIDNIGHT_TO_END_TIME_RATE;
+        int expectedExpense =  hoursPastMidnight * MIDNIGHT_TO_END_TIME_RATE;
         assertEquals(expectedExpense, expense);
     }
 
