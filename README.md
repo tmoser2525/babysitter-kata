@@ -10,7 +10,12 @@
 ## Usage
 
 ```java
-TODO
+int year = 2017;
+int month = 5;
+LocalDateTime startTime = LocalDateTime.of(year, month, 20, 17, 0);
+LocalDateTime endTime = LocalDateTime.of(year, month, 21, 1, 0);
+LocalDateTime bedTime = LocalDateTime.of(year, month, 20, 22, 0);
+int expense = calculator.calculateExpense(startTime, endTime, bedTime);
 ```
 
 ## Development
