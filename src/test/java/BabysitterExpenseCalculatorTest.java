@@ -40,7 +40,7 @@ public class BabysitterExpenseCalculatorTest {
 
     @Test
     public void shouldThrowExceptionWhenStartTimeOutsideOf5pmTo4Am() throws Exception {
-        LocalDateTime startTime = LocalDateTime.of(YEAR, MONTH,20, MIDNIGHT_TO_END_TIME_RATE,0);
+        LocalDateTime startTime = LocalDateTime.of(YEAR, MONTH,20, 16,0);
         LocalDateTime endTime = LocalDateTime.of(YEAR, MONTH,20,18,0);
         LocalDateTime bedTime = endTime;
 
