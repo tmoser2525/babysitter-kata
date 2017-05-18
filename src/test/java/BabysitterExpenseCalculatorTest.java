@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,10 +15,16 @@ public class BabysitterExpenseCalculatorTest {
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
-    @Test
-    public void calculateShouldGiveZeroWhenLessThanAnHourOfWork() {
-        BabysitterExpenseCalculator calculator = new BabysitterExpenseCalculator();
+    private BabysitterExpenseCalculator calculator;
 
+    @Before
+    public void setUp() throws Exception {
+//        exception = ExpectedException.none();
+        calculator = new BabysitterExpenseCalculator();
+    }
+
+    @Test
+    public void calculateShouldGiveZeroWhenLessThanAnHourOfWork() throws Exception {
         LocalDateTime startTime = LocalDateTime.of(2000, 5, 20, 17, 0);
         LocalDateTime endTime = LocalDateTime.of(2000, 5, 20, 17, 59);
 
@@ -27,10 +34,18 @@ public class BabysitterExpenseCalculatorTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenStartingBeforeFivePm() {
-        BabysitterExpenseCalculator calculator = new BabysitterExpenseCalculator();
+    public void shouldThrowExceptionWhenStartTimeOutsideOf5pmTo4Am() throws Exception {
         LocalDateTime startTime = LocalDateTime.of(2000,5,20,16,0);
         LocalDateTime endTime = LocalDateTime.of(2000,5,20,18,0);
+
+        exception.expect(IllegalArgumentException.class);
+        calculator.calculateExpense(startTime, endTime);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenEndTimeOutsideOf5pmTo4Am() throws Exception {
+        LocalDateTime startTime = LocalDateTime.of(2000,5,20,18,0);
+        LocalDateTime endTime = LocalDateTime.of(2000,5,20,4,1);
 
         exception.expect(IllegalArgumentException.class);
         calculator.calculateExpense(startTime, endTime);
