@@ -19,7 +19,6 @@ public class BabysitterExpenseCalculatorTest {
 
     @Before
     public void setUp() throws Exception {
-//        exception = ExpectedException.none();
         calculator = new BabysitterExpenseCalculator();
     }
 
@@ -46,6 +45,15 @@ public class BabysitterExpenseCalculatorTest {
     public void shouldThrowExceptionWhenEndTimeOutsideOf5pmTo4Am() throws Exception {
         LocalDateTime startTime = LocalDateTime.of(2000,5,20,18,0);
         LocalDateTime endTime = LocalDateTime.of(2000,5,20,4,1);
+
+        exception.expect(IllegalArgumentException.class);
+        calculator.calculateExpense(startTime, endTime);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenEndTimeIsBeforeStartTime() throws Exception {
+        LocalDateTime startTime = LocalDateTime.of(2000,5,20,19,0);
+        LocalDateTime endTime = LocalDateTime.of(2000,5,20,18,0);
 
         exception.expect(IllegalArgumentException.class);
         calculator.calculateExpense(startTime, endTime);
