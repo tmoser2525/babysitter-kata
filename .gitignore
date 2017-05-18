@@ -7,6 +7,10 @@
 # IDE files
 .idea
 
+# Build files
+build
+.gradle
+
 # BlueJ files
 *.ctxt
 
