@@ -7,7 +7,7 @@
 </tr>
 </table>
 
-## [Usage](https://iharsh234.github.io/WebApp/) 
+## Usage
 
 ```java
 TODO
