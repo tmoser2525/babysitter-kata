@@ -9,7 +9,7 @@ public class BabysitterExpenseCalculator {
     private final List<BabysittingExpenseCalculatorValidator> validators;
 
     public BabysitterExpenseCalculator() {
-        this.validators = Arrays.asList(new BusinessHoursValidator(), new TimesInOrderValidator());
+        this.validators = Arrays.asList(new BusinessHoursValidator(), new TimesInOrderValidator(), new MaximumWorkLengthValidator());
     }
 
     public int calculateExpense(LocalDateTime startTime, LocalDateTime endTime) {
