@@ -37,9 +37,9 @@ git clone https://github.com/{your-github-username}/babysitter-kata.git
 ```
 chmod +x gradlew
 ```
-3. Execute Gradle Test Task
+3. Execute Gradle Test Task with code coverage
 ```
-./gradlew clean test
+./gradlew clean test jacocoTestReport
 ```
 
 ## Built with 
