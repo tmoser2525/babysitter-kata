@@ -22,11 +22,15 @@ int expense = calculator.calculateExpense(startTime, endTime, bedTime);
 ## Development
 Want to contribute? Great!
 
-To build the project and run all of the tests, follow these steps:
+To build the project and run all of the tests using bash, follow these steps:
 1. Fork this repository
 2. Clone your fork locally
 ```
 git clone https://github.com/{your-github-username}/babysitter-kata.git
+```
+3. Ensure Gradle Wrapper is Executable (only if clone fails to read correct file mode)
+```
+chmod +x gradlew
 ```
 3. Execute Gradle Test Task
 ```
