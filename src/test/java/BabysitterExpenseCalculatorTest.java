@@ -49,16 +49,6 @@ public class BabysitterExpenseCalculatorTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenTimeWorkedLongerThanElevenHours() throws Exception {
-        LocalDateTime startTime = LocalDateTime.of(YEAR, MONTH,20,17,0);
-        LocalDateTime endTime = LocalDateTime.of(YEAR, MONTH,21,18,0);
-        LocalDateTime bedTime = endTime;
-
-        exception.expect(IllegalArgumentException.class);
-        calculator.calculateExpense(startTime, endTime, bedTime);
-    }
-
-    @Test
     public void shouldMakeTwelveDollarsAnHourFromStartUntilBedtime() {
         int startingHour = 17;
         int hoursUntilBedtime = 7;
