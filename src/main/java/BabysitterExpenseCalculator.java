@@ -9,7 +9,6 @@ import java.util.List;
 public class BabysitterExpenseCalculator {
     private static final int BEFORE_BEDTIME_HOURLY_RATE = 12;
     private static final int BEDTIME_TO_MIDNIGHT_RATE = 8;
-    private static final int HOURS_PER_DAY = 24;
     private static final int MIDNIGHT_TO_END_TIME_RATE = 16;
     private final List<BabysittingExpenseCalculatorValidator> validators;
 
@@ -46,8 +45,8 @@ public class BabysitterExpenseCalculator {
         return 0;
     }
 
-    private boolean isTimeBeforeMidnight(LocalDateTime bedTime) {
-        return bedTime.getHour() < HOURS_PER_DAY && bedTime.getHour() >= BabysittingExpenseCalculatorValidator.START_TIME_CUTOFF.getHour();
+    private boolean isTimeBeforeMidnight(LocalDateTime time) {
+        return time.getHour() >= BabysittingExpenseCalculatorValidator.START_TIME_CUTOFF.getHour();
     }
 
     private LocalDateTime nextMidnightFromDate(LocalDateTime date) {
